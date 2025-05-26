@@ -1,15 +1,29 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
+import Image from "next/image";
+import Link from "next/link";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+export const iranyekan = localFont({
+  src: [
+    {
+      path: "./fonts/IRANYekanXFaNum-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/IRANYekanXFaNum-Medium.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/IRANYekanXFaNum-Bold.woff2",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-iranyekan",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -23,11 +37,51 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="fa" dir="rtl">
+      <body className={`${iranyekan.className} antialiased `}>
+        <div className="relative w-full h-screen overflow-hidden">
+          {/* پس‌زمینه‌ها */}
+          <div className="absolute inset-0 -z-10">
+            {/* بالا */}
+            <div className="w-full h-1/2 bg-[#00375c]" />
+            {/* پایین */}
+            <div className="w-full h-1/2 relative">
+              <Image
+                src="/dargahImg.svg"
+                alt="background"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col h-full items-center justify-center ">
+            <div className="md:w-[65%] flex justify-between items-center text-white mb-3">
+              <p className="text-lg font-semibold">
+                درگاه سامانه‌های یکپارچه سازمان بازرسی کل کشور
+              </p>
+              <div className="flex gap-4 text-sm">
+                <Link
+                  href="/"
+                  className="bg-[#184f90] hover:bg-[#17457e] transition-all duration-200 px-4 py-2 rounded-full"
+                >
+                  ثبت‌نام شهروند
+                </Link>
+                <Link
+                  href="/"
+                  className="bg-[#17a2b8] hover:bg-[#128192] transition-all duration-200 px-4 py-2 rounded-full"
+                >
+                  ورود به حساب
+                </Link>
+              </div>
+            </div>
+
+            <div className="bg-white shadow-lg rounded-md w-[90%] md:w-2/3 h-[80%] overflow-hidden flex flex-col">
+              <div className="flex-1 overflow-y-hidden">{children}</div>
+            </div>
+          </div>
+        </div>
       </body>
     </html>
   );
