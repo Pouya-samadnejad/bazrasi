@@ -1,17 +1,9 @@
-// lib/utils/date.ts یا مشابه
-export const getIRTime = () => {
-  const days = [
-    "یکشنبه",
-    "دوشنبه",
-    "سه‌شنبه",
-    "چهارشنبه",
-    "پنج‌شنبه",
-    "جمعه",
-    "شنبه",
-  ];
-
+export const useIRTime = () => {
   const now = new Date();
-  const dayName = days[now.getDay()];
+
+  const dayName = new Intl.DateTimeFormat("fa-IR", { weekday: "long" }).format(
+    now
+  );
 
   const persianDate = new Intl.DateTimeFormat("fa-IR-u-ca-persian", {
     year: "numeric",
@@ -22,7 +14,7 @@ export const getIRTime = () => {
   return { dayName, persianDate };
 };
 
-export const getGreetingByTime = () => {
+export const useGreetingByTime = () => {
   const hour = new Date().getHours();
 
   if (hour >= 5 && hour < 12) return "صبح بخیر";

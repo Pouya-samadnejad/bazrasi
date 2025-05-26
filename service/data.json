@@ -4,32 +4,38 @@
       {
         "id": "1",
         "title": "شکایت و گزارش های ناشناس",
-        "image": "sadaasd"
+        "image": "sadaasd",
+        "link": ""
       },
       {
         "id": "2",
         "title": "گزارش فساد ناشناس",
-        "image": "sadaasd"
+        "image": "sadaasd",
+        "link": "/"
       },
       {
         "id": "3",
         "title": "پایگاه اطلاع رسانی سازمان",
-        "image": "sadaasd"
+        "image": "sadaasd",
+        "link": "/"
       },
       {
         "id": "4",
         "title": "سامانه ملی انتشار و دسترسی آزاد به اطلاعات",
-        "image": "sadaasd"
+        "image": "sadaasd",
+        "link": "/"
       },
       {
         "id": "5",
         "title": "تماس با 136",
-        "image": "sadaasd"
+        "image": "sadaasd",
+        "link": "/"
       },
       {
         "id": "6",
         "title": "پیگری وضعیت گزارش فساد ناشناس",
-        "image": "sadaasd"
+        "image": "sadaasd",
+        "link": "/"
       }
     ]
   }
