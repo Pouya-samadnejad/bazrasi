@@ -5,7 +5,7 @@ import React from "react";
 
 function ItemCart({ link, title }) {
   return (
-    <Link href="" className="w-full sm:w-48 md:w-56 lg:w-64">
+    <Link href={link} className="w-full sm:w-48 md:w-56 lg:w-64">
       <div className="group relative flex flex-col items-center justify-center h-48 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.02]">
         <div className="absolute top-4 right-4">
           <Image src="/justic.png" width={32} height={32} alt="item image" />
