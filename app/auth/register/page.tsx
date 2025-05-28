@@ -60,9 +60,7 @@ const page: React.FC<pageProps> = (props) => {
             },
           ]}
         >
-          <Input mask="0999 999 99 99" maskChar={null}>
-            {(inputProps) => <Input {...inputProps} size="large" />}
-          </Input>
+          <Input size="large" />
         </Form.Item>
         <Form.Item
           name="nationalCode"

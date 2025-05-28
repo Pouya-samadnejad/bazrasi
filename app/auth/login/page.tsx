@@ -77,7 +77,7 @@ const App: React.FC = () => (
                   "رمز عبور باید حداقل ۸ کاراکتر، شامل حروف بزرگ، کوچک و نماد باشد",
               },
             ]}
-            hasFeedback
+            hasFeedback={false}
           >
             <Input.Password
               prefix={
@@ -89,6 +89,17 @@ const App: React.FC = () => (
               }
               placeholder="رمز عبور را وارد کنید"
               size="large"
+              iconRender={(visible) =>
+                visible ? (
+                  <Icon icon="solar:eye-bold-duotone" width="24" height="24" />
+                ) : (
+                  <Icon
+                    icon="solar:eye-closed-line-duotone"
+                    width="24"
+                    height="24"
+                  />
+                )
+              }
             />
           </Form.Item>
           <div className="grid grid-cols-2">
