@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { AntdRegistry } from "@ant-design/nextjs-registry";
+import { ConfigProvider } from "antd";
+import theme from "@/theme/themeConfig";
 
 export const iranyekan = localFont({
   src: [
@@ -36,7 +39,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa" dir="rtl">
-      <body className={`${iranyekan.className} antialiased`}>{children}</body>
+      <body className={`${iranyekan.className} antialiased`}>
+        <ConfigProvider theme={theme}>
+          <AntdRegistry>{children}</AntdRegistry>
+        </ConfigProvider>
+      </body>
     </html>
   );
 }

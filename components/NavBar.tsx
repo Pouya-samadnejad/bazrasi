@@ -49,13 +49,13 @@ export default function NavBar() {
       </div>
       <div className="lg:flex md:justify-center gap-2 md:gap-4 text-xs md:text-sm hidden">
         <Link
-          href="/user2/register"
+          href="/auth/register"
           className="bg-[#184f90] hover:bg-[#17457e] transition-all duration-200 px-3 py-2 md:px-4 rounded-full text-white"
         >
           ثبت‌نام شهروند
         </Link>
         <Link
-          href="/user2/login"
+          href="/auth/login"
           className="bg-[#17a2b8] hover:bg-[#128192] transition-all duration-200 px-3 py-2 md:px-4 rounded-full text-white"
         >
           ورود به حساب

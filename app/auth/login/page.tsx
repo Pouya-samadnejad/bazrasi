@@ -1,9 +1,11 @@
 "use client";
 import React from "react";
 import type { FormProps } from "antd";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Form, Input } from "antd";
 import Image from "next/image";
 import Link from "next/link";
+import { Icon } from "@iconify/react/dist/iconify.js";
+
 type FieldType = {
   username?: string;
   password?: string;
@@ -19,8 +21,8 @@ const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
 };
 
 const App: React.FC = () => (
-  <div className="flex gap-5">
-    <div className="bg-white  flex flex-col justify-center items-center gap-4 border-l-white rounded-r-lg py-22 px-10">
+  <div className="flex gap-5 ">
+    <div className="bg-white lg:flex flex-col justify-center items-center gap-4 rounded-r-lg py-22 px-20 hidden">
       <Image src="/blue-logo.svg" width={280} height={280} alt="blue logo" />
       <div className="text-center text-sm ">
         <p>درگاه سامانه های یک پارچه</p>
@@ -28,11 +30,11 @@ const App: React.FC = () => (
       </div>
       <p className="text-center">136.ir</p>
     </div>
-    <div className="px-10 my-20 w-full">
-      <h2 className="text-xl px-10 mb-5 font-bold">ورود</h2>
+    <div className="px-10 my-15 w-full">
+      <h2 className="text-xl px-15 mb-5 font-bold">ورود</h2>
       <div className="flex-1 flex flex-col justify-center items-center ">
         <Form
-          name="login"
+          name="logIn"
           layout="vertical"
           initialValues={{ remember: true }}
           onFinish={onFinish}
@@ -54,6 +56,9 @@ const App: React.FC = () => (
               maxLength={10}
               inputMode="numeric"
               pattern="[0-9]*"
+              prefix={
+                <Icon icon="solar:user-bold-duotone" width="24" height="24" />
+              }
               size="large"
               onBeforeInput={(e) => {
                 if (!/^\d*$/.test(e.data ?? "")) e.preventDefault();
@@ -74,7 +79,17 @@ const App: React.FC = () => (
             ]}
             hasFeedback
           >
-            <Input.Password placeholder="رمز عبور را وارد کنید" size="large" />
+            <Input.Password
+              prefix={
+                <Icon
+                  icon="solar:lock-keyhole-minimalistic-bold-duotone"
+                  width="24"
+                  height="24"
+                />
+              }
+              placeholder="رمز عبور را وارد کنید"
+              size="large"
+            />
           </Form.Item>
           <div className="grid grid-cols-2">
             <Form.Item name="securityCode" label="کد امنیتی">
@@ -107,21 +122,36 @@ const App: React.FC = () => (
             </Link>
           </div>
           <div>
-            <div className="flex items-center gap-3 col-span-4 mb-10">
+            <div className="flex items-center gap-3 mb-10">
               <div className="bg-gray-200 h-[1px] grow"></div>
               <h2 className="font-bold text-sm text-gray-300">ورود از طریق</h2>
               <div className="bg-gray-200 h-[1px] grow"></div>
             </div>
           </div>
-          <div>
-            <Link href="/">
-              دولت من
-              {/* <Image
-                src="dolatMan.png"
-                width={10}
-                height={10}
+          <div className="flex items-center justify-center gap-6">
+            <Link
+              href="/"
+              className="flex items-center justify-center !bg-white !text-black !border-gray-300 rounded-md px-3 py-1.5 gap-1 text-[12px]"
+            >
+              <Image
+                src="/dolatMan.png"
+                width={20}
+                height={20}
                 alt="dowlat man logo"
-              /> */}
+              />
+              دولت من
+            </Link>
+            <Link
+              href="/"
+              className="flex items-center justify-center !bg-white !text-black !border-gray-300 rounded-md px-3 py-1.5 gap-1 text-[12px]"
+            >
+              <Image
+                src="/sanalogo.png"
+                width={16}
+                height={16}
+                alt="dowlat man logo"
+              />
+              ثنا قوه قضاییه
             </Link>
           </div>
         </Form>

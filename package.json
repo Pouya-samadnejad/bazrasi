@@ -9,11 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/nextjs-registry": "^1.0.2",
+    "@iconify/react": "^6.0.0",
     "@next/font": "^14.2.15",
     "antd": "^5.25.3",
     "next": "15.3.2",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-input-mask": "^2.0.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
