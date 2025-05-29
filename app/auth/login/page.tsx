@@ -22,7 +22,7 @@ const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
 
 const App: React.FC = () => (
   <div className="flex gap-5 ">
-    <div className="bg-white lg:flex flex-col justify-center items-center gap-4 rounded-r-lg py-22 px-20 hidden">
+    <div className="bg-white lg:flex flex-col justify-center items-center 2xl:gap-4 rounded-r-lg px-20 hidden">
       <Image src="/blue-logo.svg" width={280} height={280} alt="blue logo" />
       <div className="text-center text-sm ">
         <p>درگاه سامانه های یک پارچه</p>
@@ -30,7 +30,7 @@ const App: React.FC = () => (
       </div>
       <p className="text-center">136.ir</p>
     </div>
-    <div className="px-10 my-15 w-full">
+    <div className="px-10 my-8  w-full">
       <h2 className="text-xl px-15 mb-5 font-bold">ورود</h2>
       <div className="flex-1 flex flex-col justify-center items-center ">
         <Form

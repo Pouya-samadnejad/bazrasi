@@ -7,6 +7,12 @@ const theme: ThemeConfig = {
     colorPrimary: "#52c41a",
     fontFamily: iranyekan,
   },
+  components: {
+    Form: {
+      itemMarginBottom: 12,
+      labelFontSize: 12,
+    },
+  },
 };
 
 export default theme;

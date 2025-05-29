@@ -24,7 +24,7 @@ export default function Layout({ children }) {
             <NavBar />
           </div>
 
-          <div className="lg:bg-white/50 bg-white backdrop-blur-2xl shadow-lg rounded-md w-full md:w-4/5 lg:h-[80%] h-full overflow-hidden">
+          <div className="lg:bg-white/80 bg-white backdrop-blur-[20px] backdrop-saturate-[180%] shadow-lg rounded-md w-full md:w-4/5 lg:h-[80%] h-full overflow-hidden">
             <div className="flex flex-col md:flex-row h-full">
               <div className="w-full h-full overflow-y-auto p-6">
                 {children}

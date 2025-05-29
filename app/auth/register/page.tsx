@@ -2,7 +2,9 @@
 import { DatePicker, Form, Input } from "antd";
 import React from "react";
 import type { FormProps } from "antd";
-
+import { Icon } from "@iconify/react/dist/iconify.js";
+import Link from "next/link";
+import { MaskedInput } from "antd-mask-input";
 interface pageProps {}
 
 type FieldType = {
@@ -35,8 +37,13 @@ const page: React.FC<pageProps> = (props) => {
   };
 
   return (
-    <div className="px-8 py-12">
-      <h1 className="my-4">ثبت نام</h1>
+    <div className="px-8 py-6">
+      <div className="flex justify-between items-center">
+        <h1 className="my-4">ثبت نام</h1>
+        <Link href="/auth/login">
+          <Icon icon="solar:arrow-left-linear" width="24" height="24" />
+        </Link>
+      </div>
       <Form
         name="signUp"
         layout="vertical"
@@ -44,7 +51,7 @@ const page: React.FC<pageProps> = (props) => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
-        className="grid grid-cols-2 gap-6 text-[10px]"
+        className="grid grid-cols-2 gap-6"
       >
         <Form.Item
           label="شماره موبایل"
@@ -60,7 +67,18 @@ const page: React.FC<pageProps> = (props) => {
             },
           ]}
         >
-          <Input size="large" />
+          <MaskedInput
+            mask="0000 000 00 00"
+            size="large"
+            maskOptions={{ lazy: true }}
+            placeholder="0912 345 67 89"
+            dir="ltr"
+            style={{
+              direction: "ltr",
+              textAlign: "right",
+              fontFamily: "IranYekan, sans-serif",
+            }}
+          />
         </Form.Item>
         <Form.Item
           name="nationalCode"
@@ -97,28 +115,31 @@ const page: React.FC<pageProps> = (props) => {
           />
         </Form.Item>
         <Form.Item<FieldType>
+          label="نام "
+          name="name"
+          size="large"
+          rules={[{ required: true, message: "لطفا نام خود را وارد کنید" }]}
+        >
+          <Input size="large" />
+        </Form.Item>
+        <Form.Item<FieldType>
           label=" نام خانوادگی"
           name="familyName"
           size="large"
-          rules={[{ required: true, message: "Please input your username!" }]}
+          rules={[
+            { required: true, message: "لطفا نام خانوادگی خود را وارد کنید" },
+          ]}
         >
           <Input size="large" />
         </Form.Item>
         <Form.Item<FieldType>
-          name="phoneNumber"
-          label="شماره موبایل"
+          name="fatherName"
+          label=" نام پدر"
           rules={[{ required: true, message: "Please input your username!" }]}
         >
           <Input size="large" />
         </Form.Item>
-        <Form.Item<FieldType>
-          label="شماره موبایل"
-          name="phoneNumber"
-          size="large"
-          rules={[{ required: true, message: "Please input your username!" }]}
-        >
-          <Input size="large" />
-        </Form.Item>
+
         <Form.Item
           name="birthDate"
           label="تاریخ تولد"
@@ -135,6 +156,23 @@ const page: React.FC<pageProps> = (props) => {
             placeholder="تاریخ تولد "
           />
         </Form.Item>
+        <div>
+          <Form.Item name="securityCode" label="کد امنیتی">
+            <Input
+              inputMode="numeric"
+              pattern="[0-9]*"
+              size="large"
+              onBeforeInput={(e) => {
+                if (!/^\d*$/.test(e.data ?? "")) e.preventDefault();
+              }}
+            />
+          </Form.Item>
+        </div>
+        <div className="col-span-2">
+          <button className="w-full rounded-lg py-2 bg-sky-800 text-white hover:bg-sky-950 transition-all duration-200 cursor-pointer ">
+            ثبت نام
+          </button>
+        </div>
       </Form>
     </div>
   );
