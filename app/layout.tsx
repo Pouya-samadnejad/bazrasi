@@ -8,23 +8,21 @@ import theme from "@/theme/themeConfig";
 export const iranyekan = localFont({
   src: [
     {
-      path: "./fonts/IRANYekanXFaNum-Regular.woff2",
+      path: "../public/fonts/IRANYekanXFaNum-Regular.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "./fonts/IRANYekanXFaNum-Medium.woff2",
+      path: "../public/fonts/IRANYekanXFaNum-Medium.woff2",
       weight: "500",
       style: "normal",
     },
     {
-      path: "./fonts/IRANYekanXFaNum-Bold.woff2",
+      path: "../public/fonts/IRANYekanXFaNum-Bold.woff2",
       weight: "700",
       style: "normal",
     },
   ],
-  variable: "--font-iranyekan",
-  display: "swap",
 });
 
 export const metadata: Metadata = {
