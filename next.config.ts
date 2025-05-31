@@ -1,7 +1,8 @@
-// next.config.ts
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
+// next.config.js
+module.exports = {
+  images: {
+    domains: ["136.bazresi.ir"],
+  },
   async redirects() {
     return [
       {
@@ -12,5 +13,3 @@ const nextConfig: NextConfig = {
     ];
   },
 };
-
-export default nextConfig;

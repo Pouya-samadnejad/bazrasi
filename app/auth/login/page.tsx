@@ -28,7 +28,9 @@ const App: React.FC = () => (
         <p>درگاه سامانه های یک پارچه</p>
         <p>سارمانه بازرسی کل کشور</p>
       </div>
-      <p className="text-center">136.ir</p>
+      <p className="text-left" dir="ltr">
+        136.ir
+      </p>
     </div>
     <div className="px-10 my-8  w-full">
       <h2 className="text-xl px-15 mb-5 font-bold">ورود</h2>
@@ -124,19 +126,19 @@ const App: React.FC = () => (
             ثبت نام شهروند
           </button>
           <div className="flex items-center justify-center gap-4 my-2">
-            <Link className="text-black underline" href="/">
+            <Link className="text-black underline" href="/auth/forget">
               <span className="text-black underline">فراموشی رمز عبور</span>
             </Link>
 
-            <Link className="text-black" href="/">
+            <Link className="text-black" href="/auth/changeNumber">
               <span className="text-black underline"> تغییر شماره همراه </span>
             </Link>
           </div>
           <div>
             <div className="flex items-center gap-3 mb-10">
-              <div className="bg-gray-200 h-[1px] grow"></div>
-              <h2 className="font-bold text-sm text-gray-300">ورود از طریق</h2>
-              <div className="bg-gray-200 h-[1px] grow"></div>
+              <div className="bg-stone-700 h-[1px] grow"></div>
+              <h2 className="font-bold text-sm text-stone-700">ورود از طریق</h2>
+              <div className="bg-stone-700 h-[1px] grow"></div>
             </div>
           </div>
           <div className="flex items-center justify-center gap-6">

@@ -13,11 +13,11 @@ export default function Layout({ children }) {
           className="object-cover"
           priority
         />
-        <div className="bg-black/50 inset-0 z-1 absolute" />
+        <div className="bg-black/30 inset-0 z-1 absolute" />
       </div>
 
       <div className="absolute inset-0 flex items-center justify-center z-10">
-        <div className="bg-white/50 backdrop-blur-[20px] backdrop-saturate-[180%] border border-gray-400  rounded-xl shadow-lg ">
+        <div className="bg-white/80 backdrop-blur-[20px] backdrop-saturate-[180%] border border-gray-400  rounded-xl shadow-lg ">
           {children}
         </div>
       </div>
