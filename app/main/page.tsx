@@ -2,7 +2,7 @@
 import ItemCart from "@/components/ItemCart";
 import React, { useState } from "react";
 import { data } from "@/data.json";
-import { Icon } from "@iconify/react/dist/iconify.js"; // ایمپورت کردن کامپوننت آیکون
+import { Icon } from "@iconify/react/dist/iconify.js";
 
 function Page() {
   const items = data.items;
@@ -14,7 +14,6 @@ function Page() {
     else setViewMode("grid");
   };
 
-  // برای aria-label دکمه، نام حالت بعدی را مشخص می‌کنیم
   const getNextViewModeName = () => {
     if (viewMode === "grid") return "جدول";
     if (viewMode === "table") return "کشیده";
@@ -25,32 +24,21 @@ function Page() {
     <div>
       <button
         onClick={toggleView}
-        className="mb-4 px-3 py-2 bg-white text-black roundedhover:shadow-lg hover:scale-[1.02] transition-all focus:outline-none focus:ring-2 focus:ring-black-500 focus:ring-opacity-50 rounded-xl "
+        className="mb-4  border border-gray-200 bg-white p-2 shadow-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.02]transition-all focus:outline-none focus:ring-2 focus:ring-black-500 focus:ring-opacity-50 rounded-xl "
         aria-label={`تغییر حالت نمایش به ${getNextViewModeName()}`}
       >
         {viewMode === "grid" && (
-          <Icon
-            icon="solar:widget-5-bold-duotone"
-            width="24"
-            height="24"
-            title="حالت نمایش: گرید"
-          />
+          <Icon icon="solar:widget-5-bold-duotone" width="24" height="24" />
         )}
         {viewMode === "table" && (
           <Icon
             icon="solar:hamburger-menu-bold-duotone"
             width="24"
             height="24"
-            title="حالت نمایش: جدول"
           />
         )}
         {viewMode === "wide" && (
-          <Icon
-            icon="solar:card-2-bold-duotone"
-            width="24"
-            height="24"
-            title="حالت نمایش: کشیده"
-          />
+          <Icon icon="solar:card-2-bold-duotone" width="24" height="24" />
         )}
       </button>
       {/* رندر بر اساس حالت */}
