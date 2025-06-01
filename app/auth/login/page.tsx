@@ -122,7 +122,7 @@ const App: React.FC = () => (
               ورود
             </button>
           </Form.Item>
-          <button className="w-full rounded-lg py-2 bg-white border-1 border-gray-300 hover:border-black text-gray-400 hover:text-black transition-all duration-200 cursor-pointer ">
+          <button className="w-full rounded-lg py-2 bg-white border-1 border-gray-300 hover:border-black text-stone-700 hover:text-black transition-all duration-200 cursor-pointer ">
             ثبت نام شهروند
           </button>
           <div className="flex items-center justify-center gap-4 my-2">

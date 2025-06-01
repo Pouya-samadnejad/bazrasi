@@ -17,7 +17,7 @@ export default function Layout({ children }) {
       </div>
 
       <div className="absolute inset-0 flex items-center justify-center z-10">
-        <div className="bg-white/80 backdrop-blur-[20px] backdrop-saturate-[180%] border border-gray-400  rounded-xl shadow-lg ">
+        <div className="bg-white/80 backdrop-blur-[20px] backdrop-saturate-[180%] border border-gray-400  rounded-xl shadow-lg">
           {children}
         </div>
       </div>

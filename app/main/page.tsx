@@ -41,7 +41,6 @@ function Page() {
           <Icon icon="solar:card-2-bold-duotone" width="24" height="24" />
         )}
       </button>
-      {/* رندر بر اساس حالت */}
       {viewMode === "grid" && (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-5 gap-5 pl-1.5">
           {items.map((item) => (

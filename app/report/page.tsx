@@ -12,11 +12,7 @@ import {
   message,
   Typography,
 } from "antd";
-import {
-  InboxOutlined,
-  FilePdfOutlined,
-  FileImageOutlined,
-} from "@ant-design/icons";
+import { FilePdfOutlined, FileImageOutlined } from "@ant-design/icons";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 const { Option } = Select;
@@ -60,9 +56,8 @@ const CorruptionReportForm = () => {
         ثبت گزارش فساد ناشناس
       </h2>
       <Form layout="vertical" form={form}>
-        {/* Row 1 */}
         <Row gutter={16}>
-          <Col span={24}>
+          <Col xs={24}>
             <Form.Item label="موضوع">
               <Select placeholder="انتخاب موضوع" size={inputSize}>
                 <Option value="مالی">مالی</Option>
@@ -72,16 +67,15 @@ const CorruptionReportForm = () => {
           </Col>
         </Row>
 
-        {/* Row 2 */}
         <Row gutter={16}>
-          <Col span={12}>
+          <Col xs={24} md={12}>
             <Form.Item label="دستگاه اجرایی">
               <Select placeholder="انتخاب دستگاه اجرایی" size={inputSize}>
                 <Option value="وزارت A">وزارت A</Option>
               </Select>
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col xs={24} md={12}>
             <Form.Item label="موضوع تخصصی">
               <Select placeholder="انتخاب موضوع تخصصی" size={inputSize}>
                 <Option value="قرارداد">قرارداد</Option>
@@ -90,9 +84,8 @@ const CorruptionReportForm = () => {
           </Col>
         </Row>
 
-        {/* Row 3 */}
         <Row gutter={16}>
-          <Col span={12}>
+          <Col xs={24} md={12}>
             <Form.Item label="نوع گزارش">
               <Select placeholder="انتخاب نوع گزارش" size={inputSize}>
                 <Option value="مستند">مستند</Option>
@@ -100,7 +93,7 @@ const CorruptionReportForm = () => {
               </Select>
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col xs={24} md={12}>
             <Form.Item label="فوریت رسیدگی">
               <Select placeholder="انتخاب فوریت" size={inputSize}>
                 <Option value="فوری">فوری</Option>
@@ -110,16 +103,15 @@ const CorruptionReportForm = () => {
           </Col>
         </Row>
 
-        {/* Row 4 */}
         <Row gutter={16}>
-          <Col span={12}>
+          <Col xs={24} md={12}>
             <Form.Item label="برآورد ارزش فساد">
               <Select placeholder="انتخاب ارزش" size={inputSize}>
                 <Option value="کمتر از ۱۰ میلیون">کمتر از ۱۰ میلیون</Option>
               </Select>
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col xs={24} md={12}>
             <Form.Item label="محدوده جغرافیایی تأثیر">
               <Select placeholder="انتخاب محدوده" size={inputSize}>
                 <Option value="ملی">ملی</Option>
@@ -129,9 +121,8 @@ const CorruptionReportForm = () => {
           </Col>
         </Row>
 
-        {/* Row 5 */}
-        <Row>
-          <Col span={24}>
+        <Row gutter={16}>
+          <Col xs={24}>
             <Form.Item label="سازمان‌های مشارکت‌کننده در فساد">
               <Select
                 mode="tags"
@@ -142,7 +133,6 @@ const CorruptionReportForm = () => {
           </Col>
         </Row>
 
-        {/* Row 6: Textarea */}
         <Form.Item label="شرح فساد">
           <TextArea
             rows={6}
@@ -155,8 +145,6 @@ const CorruptionReportForm = () => {
           <div className="mt-1">
             <Progress
               percent={Math.min((description.length / maxChars) * 100, 100)}
-              strokeWidth={6}
-              size="small"
               showInfo={false}
               status={description.length > maxChars ? "exception" : "normal"}
             />
@@ -166,44 +154,44 @@ const CorruptionReportForm = () => {
           </div>
         </Form.Item>
 
-        {/* Upload */}
         <Form.Item label="پیوست اسناد (عکس یا PDF)">
           <Paragraph type="secondary" className="mb-2 text-sm">
             تنها فایل‌های تصویری و PDF قابل بارگذاری هستند. حداکثر حجم هر فایل ۵
             مگابایت.
           </Paragraph>
           <Dragger {...props}>
-            <p className="ant-upload-drag-icon">
-              <div className="flex justify-center">
-                <Icon
-                  icon="solar:cloud-upload-line-duotone"
-                  width="100"
-                  height="100"
-                />
-              </div>
-            </p>
+            <div className="flex justify-center">
+              <Icon
+                icon="solar:cloud-upload-line-duotone"
+                width="100"
+                height="100"
+              />
+            </div>
             <p className="ant-upload-text">
               برای آپلود فایل اینجا را کلیک یا فایل خود را بکشید
             </p>
             <p className="text-xs text-gray-500 flex justify-center items-center gap-2">
-              <FileImageOutlined /> تصاویر (.jpg, .png) &nbsp; | &nbsp;{" "}
+              <FileImageOutlined /> تصاویر (.jpg, .png) &nbsp; | &nbsp;
               <FilePdfOutlined /> اسناد PDF
             </p>
           </Dragger>
         </Form.Item>
 
-        {/* Captcha */}
         <Form.Item label="کد امنیتی">
           <Input placeholder="کد را وارد کنید" size={inputSize} />
         </Form.Item>
 
-        {/* Buttons */}
         <Form.Item>
-          <div className="flex justify-between gap-4">
-            <Button danger size={inputSize}>
+          <div className="flex flex-col md:flex-row justify-between gap-4">
+            <Button danger size={inputSize} className="w-full md:w-auto">
               انصراف
             </Button>
-            <Button type="primary" htmlType="submit" size={inputSize}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              size={inputSize}
+              className="w-full md:w-auto"
+            >
               ارسال گزارش
             </Button>
           </div>
