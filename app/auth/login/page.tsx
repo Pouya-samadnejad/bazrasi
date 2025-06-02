@@ -28,13 +28,18 @@ const App: React.FC = () => (
         <p>درگاه سامانه های یک پارچه</p>
         <p>سارمانه بازرسی کل کشور</p>
       </div>
-      <p className="text-left" dir="ltr">
+      <Link href="/" className="text-left" dir="ltr">
         136.ir
-      </p>
+      </Link>
     </div>
-    <div className="px-10 my-8  w-full">
-      <h2 className="text-xl px-15 mb-5 font-bold">ورود</h2>
-      <div className="flex-1 flex flex-col justify-center items-center ">
+    <div className=" px-20 py-10 my-8  w-full">
+      <div className="flex justify-between items-center">
+        <h2 className="text-xl mb-5 font-bold">ورود</h2>
+        <Link href="/">
+          <Icon icon="solar:arrow-left-line-duotone" width="24" height="24" />
+        </Link>
+      </div>
+      <div className="flex-1 flex flex-col  items-center ">
         <Form
           name="logIn"
           layout="vertical"
@@ -42,7 +47,7 @@ const App: React.FC = () => (
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           autoComplete="off"
-          className="w-full max-w-md"
+          className="w-full"
         >
           <Form.Item
             name="nationalCode"
@@ -122,7 +127,7 @@ const App: React.FC = () => (
               ورود
             </button>
           </Form.Item>
-          <button className="w-full rounded-lg py-2 bg-white border-1 border-gray-300 hover:border-black text-stone-700 hover:text-black transition-all duration-200 cursor-pointer ">
+          <button className="w-full rounded-lg py-2 bg-white border-1 border-gray-300 hover:border-black text-stone-00 hover:text-black transition-all duration-200 cursor-pointer ">
             ثبت نام شهروند
           </button>
           <div className="flex items-center justify-center gap-4 my-2">
