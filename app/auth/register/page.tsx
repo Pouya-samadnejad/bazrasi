@@ -1,10 +1,10 @@
 "use client";
 import { DatePicker, Form, Input } from "antd";
-import React from "react";
 import type { FormProps } from "antd";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Link from "next/link";
 import { MaskedInput } from "antd-mask-input";
+import CaptchaField from "@/components/Captcha";
 interface pageProps {}
 
 type FieldType = {
@@ -156,18 +156,7 @@ const page: React.FC<pageProps> = (props) => {
             placeholder="تاریخ تولد "
           />
         </Form.Item>
-        <div>
-          <Form.Item name="securityCode" label="کد امنیتی">
-            <Input
-              inputMode="numeric"
-              pattern="[0-9]*"
-              size="large"
-              onBeforeInput={(e) => {
-                if (!/^\d*$/.test(e.data ?? "")) e.preventDefault();
-              }}
-            />
-          </Form.Item>
-        </div>
+        <CaptchaField />
         <div className="col-span-2">
           <button className="w-full rounded-lg py-2 bg-sky-800 text-white hover:bg-sky-950 transition-all duration-200 cursor-pointer ">
             ثبت نام

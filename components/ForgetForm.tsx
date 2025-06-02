@@ -5,6 +5,7 @@ import type { FormProps } from "antd";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { MaskedInput } from "antd-mask-input";
+import CaptchaField from "./Captcha";
 
 interface pageProps {
   title?: string;
@@ -111,18 +112,7 @@ const ForgetForm: React.FC<pageProps> = ({
             }}
           />
         </Form.Item>
-        <div className="grid grid-cols-2">
-          <Form.Item name="securityCode" label="کد امنیتی">
-            <Input
-              inputMode="numeric"
-              pattern="[0-9]*"
-              size="large"
-              onBeforeInput={(e) => {
-                if (!/^\d*$/.test(e.data ?? "")) e.preventDefault();
-              }}
-            />
-          </Form.Item>
-        </div>
+        <CaptchaField />
 
         <Form.Item>
           <button

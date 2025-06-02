@@ -16,6 +16,7 @@ import {
 import { FilePdfOutlined, FileImageOutlined } from "@ant-design/icons";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Link from "next/link";
+import CaptchaField from "@/components/Captcha";
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -234,13 +235,7 @@ const CorruptionReportForm = () => {
       title: <span className="text-xs">تأیید و ارسال</span>,
       content: (
         <>
-          <Form.Item
-            label="کد امنیتی"
-            name="captcha"
-            rules={[{ required: true }]}
-          >
-            <Input placeholder="کد را وارد کنید" size={inputSize} />
-          </Form.Item>
+          <CaptchaField />
           <div className="flex flex-col md:flex-row justify-between gap-4">
             <Button danger size={inputSize} className="w-full md:w-auto">
               انصراف

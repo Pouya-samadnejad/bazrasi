@@ -1,8 +1,8 @@
 import { useIRTime } from "@/utils/GreetingUtil";
 import Image from "next/image";
-
 export default function Layout({ children }) {
   const { dayName, persianDate } = useIRTime();
+
   return (
     <>
       <div>

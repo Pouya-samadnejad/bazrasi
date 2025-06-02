@@ -4,6 +4,7 @@ import "./globals.css";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { ConfigProvider } from "antd";
 import theme from "@/theme/themeConfig";
+import { Providers } from "./providers";
 
 export const iranyekan = localFont({
   src: [
@@ -39,7 +40,9 @@ export default function RootLayout({
     <html lang="fa" dir="rtl">
       <body className={`${iranyekan.className} antialiased`}>
         <ConfigProvider theme={theme}>
-          <AntdRegistry>{children}</AntdRegistry>
+          <AntdRegistry>
+            <Providers>{children}</Providers>
+          </AntdRegistry>
         </ConfigProvider>
       </body>
     </html>
