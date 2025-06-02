@@ -49,12 +49,7 @@ const CaptchaField = () => {
             className="text-xs text-blue-500 p-0"
           >
             {isFetching ? (
-              <Icon
-                icon="solar:refresh-circle-line-duotone"
-                width="24"
-                height="24"
-                className="animate-spin"
-              />
+              <Icon icon="svg-spinners:ring-resize" width="24" height="24" />
             ) : (
               <Icon
                 icon="solar:refresh-circle-line-duotone"
