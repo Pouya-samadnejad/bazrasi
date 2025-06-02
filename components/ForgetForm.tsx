@@ -5,7 +5,7 @@ import type { FormProps } from "antd";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import { MaskedInput } from "antd-mask-input";
-import CaptchaField from "./Captcha";
+import CaptchaField from "./CaptchaField";
 
 interface pageProps {
   title?: string;

@@ -16,7 +16,7 @@ import {
 import { FilePdfOutlined, FileImageOutlined } from "@ant-design/icons";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Link from "next/link";
-import CaptchaField from "@/components/Captcha";
+import CaptchaField from "@/components/CaptchaField";
 
 const { Option } = Select;
 const { TextArea } = Input;

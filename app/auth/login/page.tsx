@@ -5,6 +5,7 @@ import { Form, Input } from "antd";
 import Image from "next/image";
 import Link from "next/link";
 import { Icon } from "@iconify/react/dist/iconify.js";
+import CaptchaField from "@/components/CaptchaField";
 
 type FieldType = {
   username?: string;
@@ -109,19 +110,7 @@ const App: React.FC = () => (
               }
             />
           </Form.Item>
-          <div className="grid grid-cols-2">
-            <Form.Item name="securityCode" label="کد امنیتی">
-              <Input
-                inputMode="numeric"
-                pattern="[0-9]*"
-                size="large"
-                onBeforeInput={(e) => {
-                  if (!/^\d*$/.test(e.data ?? "")) e.preventDefault();
-                }}
-              />
-            </Form.Item>
-          </div>
-
+          <CaptchaField />
           <Form.Item>
             <button className="w-full rounded-lg py-2 bg-sky-800 text-white hover:bg-sky-950 transition-all duration-200 cursor-pointer ">
               ورود

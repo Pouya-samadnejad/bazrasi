@@ -4,7 +4,7 @@ import type { FormProps } from "antd";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import Link from "next/link";
 import { MaskedInput } from "antd-mask-input";
-import CaptchaField from "@/components/Captcha";
+import CaptchaField from "@/components/CaptchaField";
 interface pageProps {}
 
 type FieldType = {
@@ -156,7 +156,9 @@ const page: React.FC<pageProps> = (props) => {
             placeholder="تاریخ تولد "
           />
         </Form.Item>
-        <CaptchaField />
+        <div className="col-span-2">
+          <CaptchaField />
+        </div>
         <div className="col-span-2">
           <button className="w-full rounded-lg py-2 bg-sky-800 text-white hover:bg-sky-950 transition-all duration-200 cursor-pointer ">
             ثبت نام
