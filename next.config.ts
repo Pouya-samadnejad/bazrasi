@@ -1,5 +1,11 @@
-// next.config.js
-module.exports = {
+const withPWA = require("next-pwa")({
+  dest: "public",
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === "development",
+});
+
+const nextConfig = {
   images: {
     domains: ["136.bazresi.ir"],
   },
@@ -13,3 +19,5 @@ module.exports = {
     ];
   },
 };
+
+module.exports = withPWA(nextConfig);

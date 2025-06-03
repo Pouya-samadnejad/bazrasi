@@ -29,6 +29,12 @@ export const iranyekan = localFont({
 export const metadata: Metadata = {
   title: "درگاه سامانه‌های یکپارچه",
   description: "پورتال سازمان بازرسی کل کشور",
+  themeColor: "#000000",
+  manifest: "/manifest.json",
+  icons: {
+    icon: "/icons/dolatMan.png",
+    apple: "/icons/dolatMan.png",
+  },
 };
 
 export default function RootLayout({
