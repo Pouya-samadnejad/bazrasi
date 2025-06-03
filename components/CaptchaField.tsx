@@ -16,7 +16,7 @@ const CaptchaField = () => {
       label="کد امنیتی"
       rules={[{ required: true, message: "کد امنیتی را وارد کنید" }]}
     >
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 ">
         <Input
           inputMode="numeric"
           pattern="[0-9]*"
@@ -36,7 +36,7 @@ const CaptchaField = () => {
               height={0}
               style={{
                 height: "38px",
-                width: "auto",
+                width: "120px",
                 display: "block",
               }}
               className="rounded border"

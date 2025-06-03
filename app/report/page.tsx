@@ -237,7 +237,12 @@ const CorruptionReportForm = () => {
         <>
           <CaptchaField />
           <div className="flex flex-col md:flex-row justify-between gap-4">
-            <Button danger size={inputSize} className="w-full md:w-auto">
+            <Button
+              href="/"
+              danger
+              size={inputSize}
+              className="w-full md:w-auto"
+            >
               انصراف
             </Button>
             <Button

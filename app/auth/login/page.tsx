@@ -22,7 +22,7 @@ const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
 };
 
 const App: React.FC = () => (
-  <div className="flex gap-5 ">
+  <div className="flex gap-5 lg:w-4xl ">
     <div className="bg-white lg:flex flex-col justify-center items-center 2xl:gap-4 rounded-r-lg px-20 hidden">
       <Image src="/blue-logo.svg" width={280} height={280} alt="blue logo" />
       <div className="text-center text-sm ">
@@ -33,14 +33,14 @@ const App: React.FC = () => (
         136.ir
       </Link>
     </div>
-    <div className=" px-20 py-10 my-8  w-full">
+    <div className=" px-20 py-10 my-8 w-full">
       <div className="flex justify-between items-center">
         <h2 className="text-xl mb-5 font-bold">ورود</h2>
         <Link href="/">
           <Icon icon="solar:arrow-left-line-duotone" width="24" height="24" />
         </Link>
       </div>
-      <div className="flex-1 flex flex-col  items-center ">
+      <div>
         <Form
           name="logIn"
           layout="vertical"
@@ -118,9 +118,12 @@ const App: React.FC = () => (
               ورود
             </button>
           </Form.Item>
-          <button className="w-full rounded-lg py-2 bg-white border-1 border-gray-300 hover:border-black text-stone-00 hover:text-black transition-all duration-200 cursor-pointer ">
+          <Link
+            href="/auth/register"
+            className="!block !text-center !rounded-lg py-2 !bg-white !border-1 !border-gray-300 hover:!border-black !text-stone-600 hover:!text-black !transition-all !duration-200 !cursor-pointer "
+          >
             ثبت نام شهروند
-          </button>
+          </Link>
           <div className="flex items-center justify-center gap-4 my-2">
             <Link className="text-black underline" href="/auth/forget">
               <span className="text-black underline">فراموشی رمز عبور</span>

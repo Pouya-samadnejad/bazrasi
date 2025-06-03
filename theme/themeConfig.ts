@@ -1,10 +1,9 @@
-import { iranyekan } from "@/app/layout";
 import type { ThemeConfig } from "antd";
 
 const theme: ThemeConfig = {
   token: {
     fontSize: 16,
-    fontFamily: iranyekan,
+    fontFamily: "iranyekan",
   },
   components: {
     Form: {
