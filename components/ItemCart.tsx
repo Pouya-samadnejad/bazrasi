@@ -4,9 +4,19 @@ import Link from "next/link";
 import React from "react";
 
 function ItemCart({ link, title, img, mode = "grid" }) {
+  const isExternal = link.startsWith("http://") || link.startsWith("https://");
+
+  const LinkWrapper = ({ children }: { children: React.ReactNode }) =>
+    isExternal ? (
+      <a href={link} target="_blank" rel="noopener noreferrer">
+        {children}
+      </a>
+    ) : (
+      <Link href={link}>{children}</Link>
+    );
   if (mode === "wide") {
     return (
-      <Link href={link} className="">
+      <LinkWrapper>
         <div className="group flex items-center w-[342px] gap-4 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.02]">
           <div>
             <Image
@@ -31,12 +41,12 @@ function ItemCart({ link, title, img, mode = "grid" }) {
             />
           </div>
         </div>
-      </Link>
+      </LinkWrapper>
     );
   }
 
   return (
-    <Link href={link} className="w-full ">
+    <LinkWrapper>
       <div className="group relative flex flex-col items-center justify-center h-48 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm transition-all duration-300 hover:shadow-lg hover:scale-[1.02]">
         <div className="absolute top-4 right-4">
           <Image
@@ -61,7 +71,7 @@ function ItemCart({ link, title, img, mode = "grid" }) {
           />
         </div>
       </div>
-    </Link>
+    </LinkWrapper>
   );
 }
 
