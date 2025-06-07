@@ -9,7 +9,6 @@ export default function FontBox() {
   const [open, setOpen] = useState(false);
   const { fontSize, setFontSize, fontWeight, setFontWeight } = useFont();
 
-  // Load from localStorage on mount
   useEffect(() => {
     const storedSize = localStorage.getItem("fontSize");
     const storedWeight = localStorage.getItem("fontWeight");
