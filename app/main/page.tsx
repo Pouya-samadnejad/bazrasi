@@ -85,6 +85,20 @@ function Page() {
               <p className="flex-grow">{item.title}</p>
             </div>
           ))}
+          <div
+            onClick={() => window.open("tel:136", "_blank")}
+            className="cursor-pointer flex items-center gap-4 p-2 rounded-lg transition hover:scale-[1.02] hover:bg-white block md:hidden"
+          >
+            <div className="w-10 text-center">6</div>
+            <div className="w-16 flex-shrink-0">
+              <img
+                src="https://136.bazresi.ir/dargah/assets/logos/DD.png"
+                alt="تماس با 136"
+                className="h-10 inline-block rounded"
+              />
+            </div>
+            <p className="flex-grow">تماس با 136</p>
+          </div>
         </div>
       )}
 
@@ -99,6 +113,14 @@ function Page() {
               mode="wide"
             />
           ))}
+          <div className="md:hidden">
+            <ItemCart
+              title="تماس با 136"
+              link="tel:136"
+              img="https://136.bazresi.ir/dargah/assets/logos/DD.png"
+              mode="wide"
+            />
+          </div>
         </div>
       )}
     </div>
