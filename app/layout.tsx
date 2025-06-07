@@ -5,6 +5,8 @@ import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { ConfigProvider } from "antd";
 import theme from "@/theme/themeConfig";
 import { Providers } from "./providers";
+import { FontProvider } from "@/context/FontContext";
+import FontBox from "@/components/FontBox";
 
 export const iranyekan = localFont({
   src: [
@@ -21,6 +23,16 @@ export const iranyekan = localFont({
     {
       path: "../public/fonts/IRANYekanXFaNum-Bold.woff2",
       weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/IRANYekanXFaNum-ExtraBold.woff2",
+      weight: "800",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/IRANYekanXFaNum-Black.woff2",
+      weight: "900",
       style: "normal",
     },
   ],
@@ -44,12 +56,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fa" dir="rtl">
-      <body className={`${iranyekan.className} antialiased`}>
-        <ConfigProvider theme={theme}>
-          <AntdRegistry>
-            <Providers>{children}</Providers>
-          </AntdRegistry>
-        </ConfigProvider>
+      <body
+        className={`${iranyekan.className} antialiased text-base font-base`}
+      >
+        <FontProvider>
+          <ConfigProvider theme={theme}>
+            <FontBox />
+            <AntdRegistry>
+              <Providers>{children}</Providers>
+            </AntdRegistry>
+          </ConfigProvider>
+        </FontProvider>
       </body>
     </html>
   );

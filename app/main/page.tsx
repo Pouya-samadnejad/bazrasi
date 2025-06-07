@@ -1,13 +1,14 @@
 "use client";
 import ItemCart from "@/components/ItemCart";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { data } from "@/data.json";
 import { Icon } from "@iconify/react/dist/iconify.js";
 
 function Page() {
   const items = data.items;
-  const [viewMode, setViewMode] = useState("grid");
-
+  const [viewMode, setViewMode] = useState(() => {
+    return localStorage.getItem("viewMode") || "grid";
+  });
   const toggleView = () => {
     if (viewMode === "grid") setViewMode("table");
     else if (viewMode === "table") setViewMode("wide");
@@ -19,6 +20,9 @@ function Page() {
     if (viewMode === "table") return "کشیده";
     return "مربعی";
   };
+  useEffect(() => {
+    localStorage.setItem("viewMode", viewMode);
+  }, [viewMode]);
 
   return (
     <div>
@@ -78,7 +82,7 @@ function Page() {
                   className="h-10 inline-block rounded"
                 />
               </div>
-              <div className="flex-grow">{item.title}</div>
+              <p className="flex-grow">{item.title}</p>
             </div>
           ))}
         </div>

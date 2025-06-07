@@ -28,9 +28,7 @@ function ItemCart({ link, title, img, mode = "grid" }) {
             />
           </div>
           <div className="flex-grow text-right">
-            <h3 className="text-balance font-medium text-gray-800 leading-relaxed">
-              {title}
-            </h3>
+            <h3>{title}</h3>
           </div>
           <div>
             <Icon
@@ -58,7 +56,7 @@ function ItemCart({ link, title, img, mode = "grid" }) {
           />
         </div>
         <div className="flex h-full w-full items-center justify-center">
-          <h3 className="text-right text-balance font-medium text-gray-800 leading-relaxed ">
+          <h3 className="text-right font-medium text-gray-800 leading-relaxed ">
             {title}
           </h3>
         </div>
