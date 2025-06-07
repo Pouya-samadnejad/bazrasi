@@ -3,11 +3,28 @@
 import { useFont } from "@/context/FontContext";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { FloatButton, Drawer, Slider } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function FontBox() {
   const [open, setOpen] = useState(false);
   const { fontSize, setFontSize, fontWeight, setFontWeight } = useFont();
+
+  // Load from localStorage on mount
+  useEffect(() => {
+    const storedSize = localStorage.getItem("fontSize");
+    const storedWeight = localStorage.getItem("fontWeight");
+
+    if (storedSize) setFontSize(storedSize);
+    if (storedWeight) setFontWeight(storedWeight);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("fontSize", fontSize);
+  }, [fontSize]);
+
+  useEffect(() => {
+    localStorage.setItem("fontWeight", fontWeight);
+  }, [fontWeight]);
 
   return (
     <>
@@ -17,12 +34,12 @@ export default function FontBox() {
         onClick={() => setOpen(true)}
         style={{
           position: "fixed",
-          left: 0, // 
-          top: "50%", 
-          transform: "translateY(-50%)", 
+          left: 0,
+          top: "50%",
+          transform: "translateY(-50%)",
           width: 48,
           height: 48,
-          padding: 0, 
+          padding: 0,
           lineHeight: 0,
           zIndex: 1000,
         }}
