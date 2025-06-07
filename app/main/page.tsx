@@ -87,7 +87,7 @@ function Page() {
           ))}
           <div
             onClick={() => window.open("tel:136", "_blank")}
-            className="cursor-pointer flex items-center gap-4 p-2 rounded-lg transition hover:scale-[1.02] hover:bg-white block md:hidden"
+            className="cursor-pointer flex items-center gap-4 p-2 rounded-lg transition hover:scale-[1.02] hover:bg-white  md:hidden"
           >
             <div className="w-10 text-center">6</div>
             <div className="w-16 flex-shrink-0">
