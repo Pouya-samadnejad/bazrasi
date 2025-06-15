@@ -45,7 +45,7 @@ function ItemCart({ link, title, img, mode = "grid" }) {
 
   return (
     <LinkWrapper>
-      <div className="group relative flex flex-col  items-center justify-around min-h-48 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm  transition-all duration-300 hover:shadow-lg hover:scale-[1.02]">
+      <div className="group relative flex flex-col gap-4 items-center justify-self-auto min-h-52 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm  transition-all duration-300 hover:shadow-lg hover:scale-[1.02]">
         <div className="w-full ">
           <Image
             src={img}

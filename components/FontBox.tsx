@@ -37,7 +37,7 @@ export default function FontBox() {
         <Slider
           id="fontSizeSlider"
           min={12}
-          max={32}
+          max={24}
           value={parseInt(fontSize.replace("px", ""))}
           onChange={(value) => setFontSize(`${value}px`)}
         />
