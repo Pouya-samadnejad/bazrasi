@@ -25,10 +25,10 @@ api.interceptors.response.use(
           window.location.href = "/";
           break;
         case 403:
-          window.location.href = "/403";
+          window.location.href = "errors/403";
           break;
         case 500:
-          window.location.href = "/500";
+          window.location.href = "errors/500";
           break;
         default:
           console.error("خطای ناشناخته:", error.response);
