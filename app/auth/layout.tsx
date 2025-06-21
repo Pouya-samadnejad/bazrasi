@@ -1,6 +1,7 @@
 import { useIRTime } from "@/utils/GreetingUtil";
+import { type LayoutProps } from "@/.next/types/app/main/layout";
 import Image from "next/image";
-export default function Layout({ children }) {
+export default function Layout({ children }: LayoutProps) {
   const { dayName, persianDate } = useIRTime();
 
   return (

@@ -2,7 +2,11 @@ import NavBar from "@/components/NavBar";
 import Sidebar from "@/components/SideBar";
 import Image from "next/image";
 
-export default function Layout({ children }) {
+export interface LayoutProps {
+  children: React.ReactNode;
+}
+
+export default function Layout({ children }: LayoutProps) {
   return (
     <div>
       <div className="relative w-full h-screen overflow-hidden">

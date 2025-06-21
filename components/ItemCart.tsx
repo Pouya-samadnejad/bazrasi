@@ -3,7 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-function ItemCart({ link, title, img, mode = "grid" }) {
+interface ItemCartProps {
+  title: string;
+  img: string;
+  link: string;
+  mode: string;
+}
+
+function ItemCart({ link, title, img, mode = "grid" }: ItemCartProps) {
   const isExternal = link.startsWith("http://") || link.startsWith("https://");
 
   const LinkWrapper = ({ children }: { children: React.ReactNode }) =>

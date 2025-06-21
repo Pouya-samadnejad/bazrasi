@@ -1,6 +1,7 @@
 import Image from "next/image";
+import { type LayoutProps } from "@/.next/types/app/main/layout";
 
-export default function Layout({ children }) {
+export default function Layout({ children }: LayoutProps) {
   return (
     <div className="relative min-h-screen">
       <div className="absolute inset-0 -z-10">

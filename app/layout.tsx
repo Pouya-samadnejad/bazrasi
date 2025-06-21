@@ -15,11 +15,11 @@ export const iranyekan = localFont({
       weight: "100",
       style: "normal",
     },
-    // {
-    //   path: "../public/fonts/IRANYekanXFaNum-ExtraLight.woff2",
-    //   weight: "200",
-    //   style: "normal",
-    // },
+    {
+      path: "../public/fonts/IRANYekanXFaNum-UltraLight.woff2",
+      weight: "200",
+      style: "normal",
+    },
     {
       path: "../public/fonts/IRANYekanXFaNum-Light.woff2",
       weight: "300",
