@@ -1,175 +1,202 @@
 "use client";
-import React from "react";
-import type { FormProps } from "antd";
-import { Form, Input } from "antd";
-import Image from "next/image";
+
+import { useForm, FormProvider } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import { Icon } from "@iconify/react/dist/iconify.js";
+import Image from "next/image";
+import { Icon } from "@iconify/react";
+
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormControl,
+  FormMessage,
+} from "@/components/ui/form";
 import CaptchaField from "@/components/CaptchaField";
+import { useState } from "react";
 
-type FieldType = {
-  username?: string;
-  password?: string;
-  remember?: string;
-};
+const loginSchema = z.object({
+  nationalCode: z
+    .string()
+    .length(10, "کد ملی باید دقیقا 10 رقم باشد")
+    .regex(/^\d+$/, "فقط اعداد مجاز هستند"),
+  password: z
+    .string()
+    .min(8, "رمز عبور حداقل ۸ کاراکتر است")
+    .regex(/[a-z]/, "رمز عبور باید حروف کوچک داشته باشد")
+    .regex(/[A-Z]/, "رمز عبور باید حروف بزرگ داشته باشد")
+    .regex(/[\W_]/, "رمز عبور باید حداقل یک نماد داشته باشد"),
+  securityCode: z.string().nonempty("کد امنیتی را وارد کنید"),
+});
 
-const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-  console.log("Success:", values);
-};
+type LoginFormValues = z.infer<typeof loginSchema>;
 
-const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
+export default function LoginPage() {
+  const form = useForm<LoginFormValues>({
+    resolver: zodResolver(loginSchema),
+    mode: "onSubmit",
+  });
+  const [showPassword, setShowPassword] = useState(false);
 
-const App: React.FC = () => (
-  <div className="flex gap-5 lg:w-4xl ">
-    <div className="bg-white lg:flex flex-col justify-center items-center 2xl:gap-4 rounded-r-lg px-20 hidden">
-      <Image src="/blue-logo.svg" width={280} height={280} alt="blue logo" />
-      <div className="text-center text-sm ">
-        <p>درگاه سامانه های یک پارچه</p>
-        <p>سارمانه بازرسی کل کشور</p>
-      </div>
-      <Link href="/" className="text-left" dir="ltr">
-        136.ir
-      </Link>
-    </div>
-    <div className=" px-20 py-10 my-8 w-full">
-      <div className="flex justify-between items-center">
-        <h2 className="text-xl mb-5 font-bold">ورود</h2>
-        <Link href="/">
-          <Icon icon="solar:arrow-left-line-duotone" width="24" height="24" />
+  const onSubmit = (values: LoginFormValues) => {
+    console.log("Login Success", values);
+  };
+
+  return (
+    <div className="flex gap-5 lg:w-4xl">
+      <div className="bg-white lg:flex flex-col justify-center items-center 2xl:gap-4 rounded-r-lg px-20 hidden">
+        <Image src="/blue-logo.svg" width={280} height={280} alt="blue logo" />
+        <div className="text-center text-sm">
+          <p>درگاه سامانه های یک پارچه</p>
+          <p>سازمان بازرسی کل کشور</p>
+        </div>
+        <Link href="/" className="text-left" dir="ltr">
+          136.ir
         </Link>
       </div>
-      <div>
-        <Form
-          name="logIn"
-          layout="vertical"
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
-          autoComplete="off"
-          className="w-full"
-        >
-          <Form.Item
-            name="nationalCode"
-            label="کد ملی"
-            rules={[
-              { required: true, message: "لطفا کد ملی را وارد کنید" },
-              { len: 10, message: "کد ملی باید دقیقا 10 رقم باشد" },
-              { pattern: /^\d+$/, message: "فقط اعداد مجاز هستند" },
-            ]}
-          >
-            <Input
-              minLength={10}
-              maxLength={10}
-              inputMode="numeric"
-              pattern="[0-9]*"
-              prefix={
-                <Icon icon="solar:user-bold-duotone" width="24" height="24" />
-              }
-              size="large"
-              onBeforeInput={(e) => {
-                if (!/^\d*$/.test(e.data ?? "")) e.preventDefault();
-              }}
-            />
-          </Form.Item>
 
-          <Form.Item
-            name="password"
-            label="رمز عبور"
-            rules={[
-              { required: true, message: "لطفاً رمز عبور را وارد کنید" },
-              {
-                pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/,
-                message:
-                  "رمز عبور باید حداقل ۸ کاراکتر، شامل حروف بزرگ، کوچک و نماد باشد",
-              },
-            ]}
-            hasFeedback={false}
-          >
-            <Input.Password
-              prefix={
-                <Icon
-                  icon="solar:lock-keyhole-minimalistic-bold-duotone"
-                  width="24"
-                  height="24"
-                />
-              }
-              placeholder="رمز عبور را وارد کنید"
-              size="large"
-              iconRender={(visible) =>
-                visible ? (
-                  <Icon icon="solar:eye-bold-duotone" width="24" height="24" />
-                ) : (
-                  <Icon
-                    icon="solar:eye-closed-line-duotone"
-                    width="24"
-                    height="24"
-                  />
-                )
-              }
-            />
-          </Form.Item>
-          <div className="col-span-2">
-            <CaptchaField />
-          </div>
-          <Form.Item>
-            <button className="w-full rounded-lg py-2 bg-sky-800 text-white hover:bg-sky-950 transition-all duration-200 cursor-pointer ">
-              ورود
-            </button>
-          </Form.Item>
-          <Link
-            href="/auth/register"
-            className="!block !text-center !rounded-lg py-2 !bg-white !border-1 !border-gray-300 hover:!border-black !text-stone-600 hover:!text-black !transition-all !duration-200 !cursor-pointer "
-          >
-            ثبت نام شهروند
+      <div className="px-20 py-10 my-8 w-full">
+        <div className="flex justify-between items-center">
+          <h2 className="text-xl mb-5 font-bold">ورود</h2>
+          <Link href="/">
+            <Icon icon="solar:arrow-left-line-duotone" width="24" height="24" />
           </Link>
-          <div className="flex items-center justify-center gap-4 my-2">
-            <Link className="text-black underline" href="/auth/forget">
-              <span className="text-black underline">فراموشی رمز عبور</span>
-            </Link>
+        </div>
 
-            <Link className="text-black" href="/auth/changeNumber">
-              <span className="text-black underline"> تغییر شماره همراه </span>
-            </Link>
-          </div>
-          <div>
-            <div className="flex items-center gap-3 mb-10">
-              <div className="bg-stone-700 h-[1px] grow"></div>
-              <h2 className="font-bold text-sm text-stone-700">ورود از طریق</h2>
-              <div className="bg-stone-700 h-[1px] grow"></div>
-            </div>
-          </div>
-          <div className="flex items-center justify-center gap-6">
-            <Link
-              href="/"
-              className="flex items-center justify-center !bg-white !text-black !border-gray-300 rounded-md px-3 py-1.5 gap-1 text-[12px]"
-            >
-              <Image
-                src="/dolatMan.png"
-                width={20}
-                height={20}
-                alt="dowlat man logo"
+        <FormProvider {...form}>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <FormField
+                control={form.control}
+                name="nationalCode"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-xs">کد ملی</FormLabel>
+                    <FormControl>
+                      <Input
+                        className="bg-white"
+                        {...field}
+                        inputMode="numeric"
+                        pattern="[0-9]*"
+                        minLength={10}
+                        maxLength={10}
+                        prefix={
+                          <Icon
+                            icon="solar:user-bold-duotone"
+                            width="24"
+                            height="24"
+                          />
+                        }
+                        onBeforeInput={(e) => {
+                          if (!/^\d*$/.test(e.data ?? "")) e.preventDefault();
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-              دولت من
-            </Link>
-            <Link
-              href="/"
-              className="flex items-center justify-center !bg-white !text-black !border-gray-300 rounded-md px-3 py-1.5 gap-1 text-[12px]"
-            >
-              <Image
-                src="/sanalogo.png"
-                width={16}
-                height={16}
-                alt="dowlat man logo"
+
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-xs">رمز عبور</FormLabel>
+                    <FormControl>
+                      <div className="relative w-full">
+                        <Input
+                          type={showPassword ? "text" : "password"}
+                          placeholder="رمز عبور را وارد کنید"
+                          className="pr-10 bg-white "
+                          {...field}
+                        />
+                        <Button
+                          type="button"
+                          size="icon"
+                          variant="ghost"
+                          className="absolute right-0 top-0 h-full px-3"
+                          onClick={() => setShowPassword(!showPassword)}
+                        >
+                          <Icon
+                            icon={
+                              showPassword
+                                ? "material-symbols-light:visibility-off-outline-rounded"
+                                : "material-symbols-light:visibility-outline-rounded"
+                            }
+                            width="24"
+                            height="24"
+                          />
+                        </Button>
+                      </div>
+                    </FormControl>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-              ثنا قوه قضاییه
-            </Link>
-          </div>
-        </Form>
+
+              <CaptchaField />
+
+              <Button type="submit" className="w-full">
+                ورود
+              </Button>
+
+              <Link
+                href="/auth/register"
+                className="block text-center rounded-lg py-2 border border-gray-300 text-stone-600 hover:text-black hover:border-black transition-all duration-200"
+              >
+                ثبت نام شهروند
+              </Link>
+
+              <div className="flex items-center justify-center gap-4 my-2 text-sm">
+                <Link className="underline" href="/auth/forget">
+                  فراموشی رمز عبور
+                </Link>
+                <Link className="underline" href="/auth/changeNumber">
+                  تغییر شماره همراه
+                </Link>
+              </div>
+
+              <div className="flex items-center gap-3 my-6">
+                <div className="bg-stone-700 h-[1px] grow"></div>
+                <h2 className="font-bold text-sm text-stone-700">
+                  ورود از طریق
+                </h2>
+                <div className="bg-stone-700 h-[1px] grow"></div>
+              </div>
+
+              <div className="flex items-center justify-center gap-6">
+                <Link
+                  href="/"
+                  className="flex items-center gap-2 bg-white text-black border border-gray-300 rounded-md px-3 py-1.5 text-sm"
+                >
+                  <Image
+                    src="/dolatMan.png"
+                    width={20}
+                    height={20}
+                    alt="دولت من"
+                  />
+                  دولت من
+                </Link>
+
+                <Link
+                  href="/"
+                  className="flex items-center gap-2 bg-white text-black border border-gray-300 rounded-md px-3 py-1.5 text-sm"
+                >
+                  <Image src="/sanalogo.png" width={16} height={16} alt="ثنا" />
+                  ثنا قوه قضاییه
+                </Link>
+              </div>
+            </form>
+          </Form>
+        </FormProvider>
       </div>
     </div>
-  </div>
-);
-
-export default App;
+  );
+}

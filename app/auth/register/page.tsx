@@ -1,41 +1,17 @@
 "use client";
-import { DatePicker, Form, Input } from "antd";
-import type { FormProps } from "antd";
-import { Icon } from "@iconify/react/dist/iconify.js";
+
+import { useActionState } from "react";
+import { addUser } from "@/lib/actions";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { MaskedInput } from "antd-mask-input";
-import CaptchaField from "@/components/CaptchaField";
-interface pageProps {}
+import { Icon } from "@iconify/react/dist/iconify.js";
 
-type FieldType = {
-  username?: string;
-  password?: string;
-  remember?: string;
-};
-
-const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-  console.log("Success:", values);
-};
-
-const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
-
-const page: React.FC<pageProps> = (props) => {
-  const isValidIranianNationalCode = (input) => {
-    if (!/^\d{10}$/.test(input)) return false;
-    const check = +input[9];
-    const sum = input
-      .split("")
-      .slice(0, 9)
-      .reduce((total, num, index) => total + +num * (10 - index), 0);
-    const remainder = sum % 11;
-    return (
-      (remainder < 2 && check === remainder) ||
-      (remainder >= 2 && check === 11 - remainder)
-    );
-  };
-
+export default function page() {
+  const [state, formAction, isPending] = useActionState(addUser, {
+    success: false,
+    errors: null,
+  });
   return (
     <div className="px-8 py-6">
       <div className="flex justify-between items-center">
@@ -44,129 +20,83 @@ const page: React.FC<pageProps> = (props) => {
           <Icon icon="solar:arrow-left-linear" width="24" height="24" />
         </Link>
       </div>
-      <Form
-        name="signUp"
-        layout="vertical"
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off"
-        className="md:grid grid-cols-2 gap-6"
-      >
-        <Form.Item
-          label="شماره موبایل"
-          name="phoneNumber"
-          rules={[
-            {
-              required: true,
-              message: "لطفاً شماره موبایل را وارد کنید!",
-            },
-            {
-              pattern: /^09\d{9}$/,
-              message: "شماره موبایل معتبر نیست!",
-            },
-          ]}
-        >
-          <MaskedInput
-            mask="0000 000 00 00"
-            size="large"
-            maskOptions={{ lazy: true }}
-            placeholder="0912 345 67 89"
-            dir="ltr"
-            style={{
-              direction: "ltr",
-              textAlign: "right",
-              fontFamily: "IranYekan, sans-serif",
-            }}
-          />
-        </Form.Item>
-        <Form.Item
-          name="nationalCode"
-          label="کد ملی"
-          rules={[
-            { required: true, message: "لطفا کد ملی را وارد کنید" },
-            { len: 10, message: "کد ملی باید دقیقا 10 رقم باشد" },
-            {
-              pattern: /^\d+$/,
-              message: "فقط اعداد مجاز هستند",
-            },
-            {
-              validator: (_, value) => {
-                if (!value || isValidIranianNationalCode(value)) {
-                  return Promise.resolve();
-                }
-                return Promise.reject(new Error("کد ملی معتبر نیست"));
-              },
-            },
-          ]}
-        >
-          <Input
-            minLength={10}
-            maxLength={10}
-            inputMode="numeric"
-            pattern="[0-9]*"
-            showCount
-            onBeforeInput={(e) => {
-              if (!/^\d*$/.test(e.data)) {
-                e.preventDefault();
-              }
-            }}
-            size="large"
-          />
-        </Form.Item>
-        <Form.Item<FieldType>
-          label="نام "
-          name="name"
-          size="large"
-          rules={[{ required: true, message: "لطفا نام خود را وارد کنید" }]}
-        >
-          <Input size="large" />
-        </Form.Item>
-        <Form.Item<FieldType>
-          label=" نام خانوادگی"
-          name="familyName"
-          size="large"
-          rules={[
-            { required: true, message: "لطفا نام خانوادگی خود را وارد کنید" },
-          ]}
-        >
-          <Input size="large" />
-        </Form.Item>
-        <Form.Item<FieldType>
-          name="fatherName"
-          label=" نام پدر"
-          rules={[{ required: true, message: "Please input your username!" }]}
-        >
-          <Input size="large" />
-        </Form.Item>
+      <div className="px-8 py-6 max-w-2xl mx-auto">
+        <form action={formAction} className="grid grid-cols-2 gap-4">
+          <div>
+            <label>شماره موبایل</label>
+            <Input name="phoneNumber" placeholder="09123456789" dir="ltr" />
+            {state.errors?.phoneNumber?._errors && (
+              <p className="text-red-500 text-sm">
+                {state.errors.phoneNumber._errors.join(", ")}
+              </p>
+            )}
+          </div>
 
-        <Form.Item
-          name="birthDate"
-          label="تاریخ تولد"
-          rules={[{ required: true, message: "لطفا تاریخ تولد را وارد کنید" }]}
-          getValueFromEvent={(e: any) => e?.toISOString()}
-          getValueProps={(value: any) => ({
-            value: value ? dayjs(value) : undefined,
-          })}
-        >
-          <DatePicker
-            className="w-full"
-            size="large"
-            format="YYYY-MM-DD"
-            placeholder="تاریخ تولد "
-          />
-        </Form.Item>
-        <div className="col-span-2">
-          <CaptchaField />
-        </div>
-        <div className="col-span-2">
-          <button className="w-full rounded-lg py-2 bg-sky-800 text-white hover:bg-sky-950 transition-all duration-200 cursor-pointer ">
-            ثبت نام
-          </button>
-        </div>
-      </Form>
+          <div>
+            <label>کد ملی</label>
+            <Input name="nationalCode" dir="ltr" maxLength={10} />
+            {state.errors?.nationalCode?._errors && (
+              <p className="text-red-500 text-sm">
+                {state.errors.nationalCode._errors.join(", ")}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <label>نام</label>
+            <Input name="firstName" />
+            {state.errors?.name?._errors && (
+              <p className="text-red-500 text-sm">
+                {state.errors.name._errors.join(", ")}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <label>نام خانوادگی</label>
+            <Input name="lastName" />
+            {state.errors?.familyName?._errors && (
+              <p className="text-red-500 text-sm">
+                {state.errors.familyName._errors.join(", ")}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <label>نام پدر</label>
+            <Input name="fatherName" />
+            {state.errors?.fatherName?._errors && (
+              <p className="text-red-500 text-sm">
+                {state.errors.fatherName._errors.join(", ")}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <label>تاریخ تولد</label>
+            <Input type="date" name="birthDate" />
+            {state.errors?.birthDate?._errors && (
+              <p className="text-red-500 text-sm">
+                {state.errors.birthDate._errors.join(", ")}
+              </p>
+            )}
+          </div>
+
+          <Button
+            type="submit"
+            className="bg-blue-800 hover:bg-blue-950 text-white"
+            disabled={isPending}
+          >
+            {isPending ? "در حال ارسال..." : "ثبت نام"}
+          </Button>
+
+          {state.success && (
+            <p className="text-green-600 mt-2">
+              ✅ ثبت‌نام با موفقیت انجام شد!
+            </p>
+          )}
+        </form>
+      </div>
     </div>
   );
-};
-
-export default page;
+}

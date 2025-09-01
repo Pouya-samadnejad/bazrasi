@@ -1,9 +1,15 @@
 "use client";
 
 import { useFont } from "@/context/FontContext";
-import { Icon } from "@iconify/react/dist/iconify.js";
-import { FloatButton, Slider, Popover } from "antd";
+import { Icon } from "@iconify/react";
 import { useEffect, useState } from "react";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@/components/ui/popover";
+import { Slider } from "@/components/ui/slider";
+import { Button } from "@/components/ui/button";
 
 export default function FontBox() {
   const { fontSize, setFontSize, fontWeight, setFontWeight } = useFont();
@@ -25,74 +31,57 @@ export default function FontBox() {
     localStorage.setItem("fontWeight", fontWeight);
   }, [fontWeight]);
 
-  const content = (
-    <div style={{ width: 240, fontSize: "16px" }}>
-      <div style={{ marginBottom: "24px" }}>
-        <label
-          htmlFor="fontSizeSlider"
-          style={{ fontWeight: "bold", display: "block", marginBottom: "8px" }}
-        >
-          اندازه فونت: <span style={{ color: "#1677ff" }}>{fontSize}</span>
-        </label>
-        <Slider
-          id="fontSizeSlider"
-          min={12}
-          max={24}
-          value={parseInt(fontSize.replace("px", ""))}
-          onChange={(value) => setFontSize(`${value}px`)}
-        />
-      </div>
-
-      <div>
-        <label
-          htmlFor="fontWeightSlider"
-          style={{ fontWeight: "bold", display: "block", marginBottom: "8px" }}
-        >
-          ضخامت فونت: <span style={{ color: "#1677ff" }}>{fontWeight}</span>
-        </label>
-        <Slider
-          id="fontWeightSlider"
-          min={100}
-          max={900}
-          step={100}
-          value={parseInt(fontWeight)}
-          onChange={(value) => setFontWeight(`${value}`)}
-        />
-      </div>
-    </div>
-  );
-
   return (
-    <Popover
-      content={content}
-      title="تنظیمات فونت"
-      trigger="click"
-      open={visible}
-      onOpenChange={(open) => setVisible(open)}
-      placement="right"
-    >
-      <FloatButton
-        shape="square"
-        type="primary"
-        style={{
-          position: "fixed",
-          left: 0,
-          top: "50%",
-          transform: "translateY(-50%)",
-          width: 48,
-          height: 48,
-          padding: 0,
-          lineHeight: 0,
-          zIndex: 1000,
-        }}
-        icon={
+    <Popover open={visible} onOpenChange={setVisible}>
+      <PopoverTrigger asChild>
+        <Button
+          variant="default"
+          size="icon"
+          className="fixed left-2 top-1/2 transform -translate-y-1/2 z-50 w-12 h-12 p-0 bg-blue-800 hover:bg-blue-950"
+        >
           <Icon
             icon="solar:magic-stick-3-line-duotone"
             width="24"
             height="24"
           />
-        }
-      />
+        </Button>
+      </PopoverTrigger>
+
+      <PopoverContent
+        className="w-[260px] text-sm bg-white/80 backdrop-blur-[20px]"
+        side="right"
+        align="center"
+      >
+        <div className="space-y-6">
+          <div>
+            <label className="font-bold mb-2 block">
+              اندازه فونت: <span className="text-primary">{fontSize}</span>
+            </label>
+            <Slider
+              min={12}
+              max={24}
+              step={1}
+              defaultValue={[parseInt(fontSize.replace("px", ""))]}
+              onValueChange={([value]) => setFontSize(`${value}px`)}
+              className="text-blue-800"
+            />
+          </div>
+
+          <div>
+            <label className="font-bold mb-2 block">
+              ضخامت فونت: <span className="text-primary">{fontWeight}</span>
+            </label>
+            <Slider
+              min={100}
+              max={900}
+              step={100}
+              defaultValue={[parseInt(fontWeight)]}
+              onValueChange={([value]) => setFontWeight(`${value}`)}
+              className="text-blue-800"
+            />
+          </div>
+        </div>
+      </PopoverContent>
     </Popover>
   );
 }
