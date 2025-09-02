@@ -1,13 +1,10 @@
 import api from "@/utils/api";
 import axios from "axios";
-export interface User {
-  phoneNumber: string;
-  nationalCode: string;
-  name: string;
-  familyName: string;
-  fatherName: string;
-  birthDate: string;
-}
+import { formSchema } from "@/lib/actions";
+import { z } from "zod";
+
+export type User = z.infer<typeof formSchema>;
+
 const getCaptcha = () => {
   return new Promise((resolve, reject) => {
     api
@@ -21,17 +18,20 @@ const getCaptcha = () => {
   });
 };
 
-async function registerUser(user: User) {
+export async function registerUser(user: User) {
+  console.log(
+    "✅ Final data being sent to API:",
+    JSON.stringify(user, null, 2)
+  );
+
   try {
     const response = await axios.post(
-      "https://687cedfc918b642243307b10.mockapi.io/api/v1/register",
+      "https://68b6cf9973b3ec66cec2c9a6.mockapi.io/api/v1/users",
       user
     );
     return response.data;
   } catch (error: any) {
-    console.error("خطا در API ثبت‌نام:", error.message);
     throw error;
   }
 }
-
-export { getCaptcha, registerUser };
+export { getCaptcha };
